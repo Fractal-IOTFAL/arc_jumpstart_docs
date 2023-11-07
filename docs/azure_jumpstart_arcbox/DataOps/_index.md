@@ -1,15 +1,14 @@
 ---
 type: docs
-linkTitle: "Jumpstart ArcBox for DataOps"
+linkTitle: "ArcBox for DataOps"
 weight: 4
 ---
-
 
 ## Jumpstart ArcBox for DataOps
 
 ArcBox for DataOps is a special "flavor" of ArcBox that is intended for users who want to experience Azure Arc-enabled SQL Managed Instance capabilities in a sandbox environment.
 
-![ArcBox architecture diagram](./arc_dataops.png)
+![Screenshot showing ArcBox architecture diagram](./arch_dataops.png)
 
 ### Use cases
 
@@ -81,7 +80,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
 
 ## Prerequisites
 
-- [Install or update Azure CLI to version 2.40.0 and above](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest). Use the below command to check your current installed version.
+- [Install or update Azure CLI to version 2.53.0 and above](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest). Use the below command to check your current installed version.
 
   ```shell
   az --version
@@ -188,9 +187,9 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
 
     ![Screenshot showing creating an SPN with PowerShell](./create_spn_powershell.png)
 
-    > **NOTE: If you create multiple subsequent role assignments on the same service principal, your client secret (password) will be destroyed and recreated each time. Therefore, make sure you grab the correct password.**
+    > **Note:** If you create multiple subsequent role assignments on the same service principal, your client secret (password) will be destroyed and recreated each time. Therefore, make sure you grab the correct password.
 
-    > **NOTE: The Jumpstart scenarios are designed with as much ease of use in-mind and adhering to security-related best practices whenever possible. It is optional but highly recommended to scope the service principal to a specific [Azure subscription and resource group](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest) as well considering using a [less privileged service principal account](https://docs.microsoft.com/azure/role-based-access-control/best-practices)**
+    > **Note:** The Jumpstart scenarios are designed with as much ease of use in-mind and adhering to security-related best practices whenever possible. It is optional but highly recommended to scope the service principal to a specific [Azure subscription and resource group](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest) as well considering using a [less privileged service principal account](https://docs.microsoft.com/azure/role-based-access-control/best-practices).
 
 - [Generate a new SSH key pair](https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed) or use an existing one (Windows 10 and above now comes with a built-in ssh client). The SSH key is used to configure secure access to the Linux virtual machines that are used to run the Kubernetes clusters.
 
@@ -218,7 +217,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
 
   ![Screenshot showing Azure portal deployment of ArcBox](./portal_deploy03.png)
   
-    > **NOTE: The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).**
+    > **Note:** The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).
 
 ## Deployment Option 2: ARM template with Azure CLI
 
@@ -255,7 +254,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
 
   ![Screenshot showing az deployment group create](./az_deploy.png)
   
-  > **NOTE: The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).**
+  > **Note:** The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).
 
 ## Deployment Option 3: Azure Bicep deployment via Azure CLI
 
@@ -292,7 +291,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
   az deployment group create -g "<resource-group-name>" -f "main.bicep" -p "main.parameters.json"
   ```
   
-  > **NOTE: The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).**
+  > **Note:** The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).
 
 ## Deployment Option 4: HashiCorp Terraform Deployment
 
@@ -304,7 +303,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
 
 - Download and install the latest version of Terraform [here](https://www.terraform.io/downloads.html)
 
-  > **NOTE: Terraform 1.x or higher is supported for this deployment. Tested with Terraform v1.0.9+.**
+  > **Note:** Terraform 1.x or higher is supported for this deployment. Tested with Terraform v1.0.9+.
 
 - Create a `terraform.tfvars` file in the root of the terraform folder and supply some values for your environment.
 
@@ -332,7 +331,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
   - _`client_admin_password`_ - Admin password for Windows VMs. Password must have 3 of the following: 1 lower case character, 1 upper case character, 1 number, and 1 special character. The value must be between 12 and 123 characters long.
   - **_`workspace_name`_** - Unique name for the ArcBox Log Analytics workspace that will be created
 
-  > **NOTE: Any variables in bold are required. If any optional parameters are not provided, defaults will be used.**
+  > **Note:** Any variables in bold are required. If any optional parameters are not provided, defaults will be used.
 
 - Now you will deploy the Terraform file. Navigate to the local cloned [deployment folder](https://github.com/microsoft/azure_arc/tree/main/azure_jumpstart_arcbox/bicep) and run the commands below:
 
@@ -354,7 +353,7 @@ ArcBox uses an advanced automation flow to deploy and configure all necessary re
 
   ![terraform plan](./terraform_apply.png)
   
-  > **NOTE: The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).**
+  > **Note:** The deployment can take up to 45 minutes. If it keeps running for more than that, please check the [troubleshooting guide](/azure_jumpstart_arcbox/dataops/#basic-troubleshooting).
 
 ## Start post-deployment automation
 
@@ -362,13 +361,13 @@ Once your deployment is complete, you can open the Azure portal and see the ArcB
 
   ![Screenshot showing all deployed resources in the resource group](./deployed_resources.png)
 
-   > **NOTE: For enhanced ArcBox security posture, RDP (3389) and SSH (22) ports are not open by default in ArcBox deployments. You will need to create a network security group (NSG) rule to allow network access to port 3389, or use [Azure Bastion](https://docs.microsoft.com/azure/bastion/bastion-overview) or [Just-in-Time (JIT)](https://docs.microsoft.com/azure/defender-for-cloud/just-in-time-access-usage?tabs=jit-config-asc%2Cjit-request-asc) access to connect to the VM.**
+   > **Note:** For enhanced ArcBox security posture, RDP (3389) and SSH (22) ports are not open by default in ArcBox deployments. You will need to create a network security group (NSG) rule to allow network access to port 3389, or use [Azure Bastion](https://docs.microsoft.com/azure/bastion/bastion-overview) or [Just-in-Time (JIT)](https://docs.microsoft.com/azure/defender-for-cloud/just-in-time-access-usage?tabs=jit-config-asc%2Cjit-request-asc) access to connect to the VM.
 
 ### Connecting to the ArcBox Client virtual machine
 
 Various options are available to connect to _ArcBox-Client_ VM, depending on the parameters you supplied during deployment.
 
-- [RDP](/azure_jumpstart_arcbox/DataOps/#connecting-directly-with-rdp) - available after configuring access to port 3389 on the _ArcBox-NSG_, or by enabling [Just-in-Time access (JIT)](/azure_jumpstart_arcbox/DataOps/#connect-using-just-in-time-accessjit).
+- [RDP](/azure_jumpstart_arcbox/DataOps/#connecting-directly-with-rdp) - available after configuring access to port 3389 on the _ArcBox-NSG_, or by enabling [Just-in-Time access (JIT)](/azure_jumpstart_arcbox/DataOps/#connect-using-just-in-time-access-jit).
 - [Azure Bastion](/azure_jumpstart_arcbox/DataOps/#connect-using-azure-bastion) - available if ```true``` was the value of your _`deployBastion`_ parameter during deployment.
 
 #### Connecting directly with RDP
@@ -395,7 +394,7 @@ By design, ArcBox does not open port 3389 on the network security group. Therefo
 
   ![Screenshot showing connecting to the VM using Bastion](./bastion_connect.png)
 
-  > **NOTE: When using Azure Bastion, the desktop background image is not visible. Therefore some screenshots in this guide may not exactly match your experience if you are connecting to _ArcBox-Client_ with Azure Bastion.**
+  > **Note:** When using Azure Bastion, the desktop background image is not visible. Therefore some screenshots in this guide may not exactly match your experience if you are connecting to _ArcBox-Client_ with Azure Bastion.
 
 #### Connect using just-in-time access (JIT)
 
@@ -420,7 +419,7 @@ Example:
 
   ![Screenshot showing connecting to the VM using UPN format in Bastion](./domain_login_bastion.png)
 
-> **Warning: Logging into the Client VM without the UPN format _username@&#65279;jumpstart.local_ will prevent the automation from running automatically.**
+> **Note:** Logging into the Client VM without the UPN format _username@&#65279;jumpstart.local_ will prevent the automation from running automatically.
 
 #### The Logon scripts
 
@@ -474,7 +473,7 @@ When deploying Azure Arc-enabled SQL Managed Instance, a [Grafana](https://grafa
 
   ![Screenshot showing Grafana desktop shortcut](./grafana_icon.png)
 
-- [Optional] The IP address for this instance represents the Kubernetes LoadBalancer external IP that was provision as part of Azure Arc-enabled data services. Use the _kubectl get svc -n arc_ command to view the metricsui external service IP address.
+- [Optional] The IP address for this instance represents the Kubernetes LoadBalancer external IP that was provision as part of Azure Arc-enabled data services. Use the _kubectl get svc -n arc_ command to view the _metricsui_ external service IP address.
 
   ![Screenshot showing Grafana Ip address](./grafana_ip_address.png)
 
@@ -580,7 +579,7 @@ This section provides instructions on how to perform point in time restore from 
 
 To view backups of full, differential, and transaction logs wait for more than 12 hours after deploying the ArcBox DataOps flavor. Once these backups are available follow instructions below to perform a point in time restore of database. If you would like to test this feature immediately, you can simply use the latest backup set when restoring.
 
-- Once you login to the ArcBox-Client VM using RDP or bastion host, locate Azure Data Studio icon on the desktop and open.
+- Once you login to the _ArcBox-Client_ VM using RDP or bastion host, locate Azure Data Studio icon on the desktop and open.
 
 ![Open Azure Data Studio](./sqlmi-pitr-azdatastudio.png)
 
@@ -736,7 +735,7 @@ Initiate the backup restore process
   $nestedWindowsPassword = "ArcDemo123!!"
   $secWindowsPassword = ConvertTo-SecureString $nestedWindowsPassword -AsPlainText -Force
   $winCreds = New-Object System.Management.Automation.PSCredential ($nestedWindowsUsername, $secWindowsPassword)
-  $session = New-PSSession -VMName Arcbox-SQL -Credential $winCreds
+  $session = New-PSSession -VMName ArcBox-SQL -Credential $winCreds
   #Copying the database backup to the Client VM
   Copy-Item -FromSession $session -Path C:\temp\AdventureWorksLT2019.bak -Destination C:\Temp\AdventureWorksLT2019.bak
   #Copying the database to the AKS SQL Managed Instance
@@ -790,7 +789,7 @@ Please note it may take some time to show this status in the Azure portal, but s
 
   ![Screenshot showing Defender for SQL security incidents and alerts](./sql-defender-incidents.png)
 
-   > **NOTE: Once in a while executing Defender for SQL test script (_testDefenderForSQL.ps1_) may fail due to delays in deploying SQLAdvancedThreatProtection Log Analytics solution and may not generate security incidents and alerts. If you do not find these security incidents and alerts, log in to nested SQL server VM _ArcBox-SQL_ in Hyper-V and execute the test script manually as shown below.**
+   > **Note:** Once in a while executing Defender for SQL test script (_testDefenderForSQL.ps1_) may fail due to delays in deploying SQLAdvancedThreatProtection Log Analytics solution and may not generate security incidents and alerts. If you do not find these security incidents and alerts, log in to nested SQL server VM _ArcBox-SQL_ in Hyper-V and execute the test script manually as shown below.
 
 - The below screenshot shows the test script used to generate SQL threats, detect, and alert using Defender for Cloud for SQL servers. This script is copied on the nested _ArcBox-SQL_ Hyper-V virtual machine and can be used to run additional tests to generate security incidents and alerts.
 
@@ -884,7 +883,7 @@ In the case of a failed deployment, pointing to a failure in the _ubuntuCAPIDepl
 
     ![Screenshot showing ArcBox-CAPI-MGMT virtual machine public IP](./arcbox_capi_mgmt_vm_ip.png)
 
-    > **NOTE: Port 22 is not open by default in ArcBox deployments. You will need to [create an NSG rule](/azure_jumpstart_arcbox/DataOps/#connecting-directly-with-rdp) to allow network access to port 22, or use Azure Bastion or JIT to connect to the VM.**
+    > **Note:** Port 22 is not open by default in ArcBox deployments. You will need to [create an NSG rule](/azure_jumpstart_arcbox/DataOps/#connecting-directly-with-rdp) to allow network access to port 22, or use Azure Bastion or JIT to connect to the VM.
 
 - As described in the message of the day (motd), depending on which virtual machine you logged into, the installation log can be found in the _jumpstart_logs_ folder. This installation logs can help determine the root cause for the failed deployment.
   - _ArcBox-CAPI-MGMT_ log path: _jumpstart_logs/installCAPI.log_

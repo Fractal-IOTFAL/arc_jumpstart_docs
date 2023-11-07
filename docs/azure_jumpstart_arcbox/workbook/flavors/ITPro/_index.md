@@ -10,7 +10,7 @@ ArcBox for IT Pros is a special "flavor" of ArcBox that is intended for users wh
 
 As part of ArcBox for IT Pros, an Azure Monitor workbook is deployed to provide a single pane of glass for monitoring and reporting on ArcBox resources. Using Azure's management and operations tools in hybrid, multi-cloud and edge deployments provides the consistency needed to manage each environment through a common set of governance and operations management practices. The Azure Monitor workbook acts as a flexible canvas for data analysis and visualization in the Azure portal, gathering information from several data sources from across ArcBox and combining them into an integrated interactive experience.
 
-   > **Note: Due to the number of Azure resources included in a single ArcBox deployment and the data ingestion and analysis required, it is expected that metrics and telemetry for the workbook can take several hours to be fully available.**
+   > **Note:** Due to the number of Azure resources included in a single ArcBox deployment and the data ingestion and analysis required, it is expected that metrics and telemetry for the workbook can take several hours to be fully available.
 
 ## Access the ArcBox for IT Pros workbook
 
@@ -24,7 +24,7 @@ The Jumpstart ArcBox workbook is automatically deployed for you as part of ArcBo
 
 - The Jumpstart ArcBox for IT Pros Workbook will be displayed.
 
-   ![Arcbox for IT Pros workbook overview](./workbook_overview.png)
+   ![ArcBox for IT Pros workbook overview](./workbook_overview.png)
 
 ## ArcBox for IT Pros Workbook capabilities
 
@@ -44,7 +44,7 @@ The "Inventory" tab in the ArcBox for IT Pros Workbook has three sections:
 
    ![Inventory Parameters](./inventory_parameters.png)
 
-- *Resource Count by Type* - this visualization shows the number of resources by type within a resource group, these grouping will be automatically refreshed if the parameters section is changed.
+- _Resource Count by Type_ - this visualization shows the number of resources by type within a resource group, these grouping will be automatically refreshed if the parameters section is changed.
 
    ![Inventory Resource by type](./inventory_count_by_type.png)
 

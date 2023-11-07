@@ -16,7 +16,7 @@ By the end of this scenario, you will have Windows Azure Arc-enabled servers wit
 
 This scenario starts at the point where you already deployed **[Jumpstart ArcBox for IT Pros](/azure_jumpstart_arcbox/itpro/)** and have 5 Azure Arc-enabled servers in the resource group is deployed to visible as resources in Azure.
 
-![Screenshot of Azure Portal showing Azure Arc-enabled servers](./01.png)
+![Screenshot of Azure portal showing Azure Arc-enabled servers](./01.png)
 
 The custom configurations are written using PowerShell Desired State Configuration (DSC), and needs to be authored from a machine running the target operating system for the configurations (Linux-machine for Linux configurations and Windows-machine for Windows configurations).
 
@@ -74,7 +74,7 @@ Due to using MOF-based DSC resources for the Windows demo-configuration, we are 
 
 ## Azure resources
 
-> **NOTE: For the remaining code blocks in this article, copy the code into ```C:\ArcBox\MachineConfiguration.ps1```, mark the lines you want to run and click F8.**
+> **Note:** For the remaining code blocks in this article, copy the code into ```C:\ArcBox\MachineConfiguration.ps1```, mark the lines you want to run and click F8.
 
 Authenticate to Azure
 
@@ -250,25 +250,25 @@ if ($roleDefinitionIds.Count -gt 0)
 
 Check policy compliance by following these steps:
 
-- In the Azure Portal, navigate to *Policy* -> *Compliance*
+- In the Azure portal, navigate to *Policy* -> *Compliance*
 - Set the scope to the resource group your instance of ArcBox is deployed to
 - Filter for *(AzureArcJumpstart) [Windows] Custom configuration*
 
-![Screenshot of Azure Portal showing Azure Policy compliance](./02.png)
+![Screenshot of Azure portal showing Azure Policy compliance](./02.png)
 
 It may take 15-20 minutes for the policy remediation to be completed.
 
 Get a Machine Configuration specific view by following these steps:
 
-- In the Azure Portal, navigate to *Azure Arc* -> *Servers*
+- In the Azure portal, navigate to *Azure Arc* -> *Servers*
 - Click on ArcBox-Win2K22 -> Machine Configuration
 - If the status for *ArcBox-Win2K22/AzureArcJumpstart_Windows* is not *Compliant*, wait a few more minutes and click *Refresh*
 
-![Screenshot of Azure Portal showing Azure Machine Configuration compliance](./03.png)
+![Screenshot of Azure portal showing Azure Machine Configuration compliance](./03.png)
 
 Click on *ArcBox-Win2K22/AzureArcJumpstart_Windows* to get a per-resource view of the compliance state in the assigned configuration
 
-![Screenshot of Azure Portal showing Azure Machine Configuration compliance detailed view](./04.png)
+![Screenshot of Azure portal showing Azure Machine Configuration compliance detailed view](./04.png)
 
 ### Verify that the operating system level settings are in place
 
@@ -294,7 +294,7 @@ Verify that PowerShell 7 is installed by running ```pwsh```.
 
 ![Screenshot of PowerShell 7 presence on ArcBox-Win2K22](./07.png)
 
-> *NOTE: If you prefer to log on interactively to a Remote Desktop session in order to verify the configuration settings, add -Rdp to the Enter-AzVM command:
+> **Note:** If you prefer to log on interactively to a Remote Desktop session in order to verify the configuration settings, add -Rdp to the Enter-AzVM command.
 
 ```powershell
 Enter-AzVM -ResourceGroupName $ResourceGroupName -Name ArcBox-Win2K22 -LocalUser Administrator -Rdp
@@ -320,7 +320,7 @@ In this scenario you have performed the following tasks:
 - Used the GuestConfiguration module to [create an Azure Policy definition](https://learn.microsoft.com/azure/governance/machine-configuration/machine-configuration-create-definition) for at-scale management of your environment.
 - [Assigned your custom policy definition](https://learn.microsoft.com/azure/governance/policy/assign-policy-portal) to the ArcBox resource group.
 
-> *NOTE: For ArcBox exploration, it is recommended to perform the assignment at the resource group level where the Azure Arc-enabled servers reside to not accidentally apply the configuration to other machines in your environment*
+> **Note:** For ArcBox exploration, it is recommended to perform the assignment at the resource group level where the Azure Arc-enabled servers reside to not accidentally apply the configuration to other machines in your environment.
 
 ## Next steps
 

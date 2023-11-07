@@ -12,7 +12,7 @@ The following Jumpstart scenario will guide you on how to deploy a "Ready to Go"
 
 By the end of this scenario, you will have an EKS cluster deployed with an Azure Arc Data Controller, PostgreSQL instance, and a Microsoft Windows Server 2022 (Datacenter) Azure client VM, installed & pre-configured with all the required tools needed to work with Azure Arc-enabled data services.
 
-> **NOTE: Currently, Azure Arc-enabled PostgreSQL is in [public preview](https://docs.microsoft.com/azure/azure-arc/data/release-notes)**.
+> **Note:** Currently, Azure Arc-enabled PostgreSQL is in [public preview](https://docs.microsoft.com/azure/azure-arc/data/release-notes).
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ By the end of this scenario, you will have an EKS cluster deployed with an Azure
   git clone https://github.com/microsoft/azure_arc.git
   ```
 
-- [Install or update Azure CLI to version 2.49.0 and above](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest). Use the below command to check your current installed version.
+- [Install or update Azure CLI to version 2.53.0 and above](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest). Use the below command to check your current installed version.
 
   ```shell
   az --version
@@ -74,9 +74,9 @@ By the end of this scenario, you will have an EKS cluster deployed with an Azure
     }
     ```
 
-    > **NOTE: If you create multiple subsequent role assignments on the same service principal, your client secret (password) will be destroyed and recreated each time. Therefore, make sure you grab the correct password**.
+    > **Note:** If you create multiple subsequent role assignments on the same service principal, your client secret (password) will be destroyed and recreated each time. Therefore, make sure you grab the correct password.
 
-    > **NOTE: The Jumpstart scenarios are designed with as much ease of use in-mind and adhering to security-related best practices whenever possible. It is optional but highly recommended to scope the service principal to a specific [Azure subscription and resource group](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest) as well considering using a [less privileged service principal account](https://docs.microsoft.com/azure/role-based-access-control/best-practices)**
+    > **Note:** The Jumpstart scenarios are designed with as much ease of use in-mind and adhering to security-related best practices whenever possible. It is optional but highly recommended to scope the service principal to a specific [Azure subscription and resource group](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest) as well considering using a [less privileged service principal account](https://docs.microsoft.com/azure/role-based-access-control/best-practices).
 
 - Follow the steps [here](https://docs.microsoft.com/azure/azure-arc/kubernetes/custom-locations#enable-custom-locations-on-cluster) or run the command below to retrieve your AAD Tenant Specific ObjectID for the "Custom Locations RP" Enterprise Application needed to onboard Custom Locations on EKS:
   
@@ -84,11 +84,12 @@ By the end of this scenario, you will have an EKS cluster deployed with an Azure
   # Note that the APPLICATION ID: bc313c14-388c-4e7d-a58e-70017303ee3b is constant across all tenants
   az ad sp show --id 'bc313c14-388c-4e7d-a58e-70017303ee3b' --query id -o tsv
   ```
+
 - Create a resource group
 
    ```shell
    az group create --name "Arc-Data-Demo" --location "eastus"
-   ```
+
 ### Create a new AWS IAM Role & Key
 
 Create AWS User IAM Key. An access key grants programmatic access to your resources which we will be using later in this scenario.
@@ -137,7 +138,7 @@ Create AWS User IAM Key. An access key grants programmatic access to your resour
 
   ![Screenshot showing creating an EC2 Key Pair](./13.png)
 
-  > **NOTE: EC2 Key Pairs are regional.**
+  > **Note:** EC2 Key Pairs are regional.
 
 ## Automation Flow
 
@@ -190,12 +191,12 @@ As mentioned, the Terraform plan will deploy an EKS cluster, the Azure Arc Data 
   - **_`subscriptionId`_** - Your Azure subscription Id.
   - **_`resourceGroup`_** - Resource group which will contain all of the Azure Arc data services resources.
   - **_`workspaceName`_** - Unique name for the ArcBox Log Analytics workspace.
-  - _`deploySQLMI`_ - Boolean that sets whether or not to deploy SQL Managed Instance, for this data controller vanilla scenario we leave it set to _**false**_.
-  - _`SQLMIHA`_ - Boolean that sets whether or not to deploy SQL Managed Instance with high-availability (business continuity) configurations, for this data controller vanilla scenario we leave it set to _**false**_.
-  - _`deployPostgreSQL`_ - Boolean that sets whether or not to deploy PostgreSQL, for this data controller vanilla scenario we leave it set to _**false**_.
+  - _`deploySQLMI`_ - Boolean that sets whether or not to deploy SQL Managed Instance, for this data controller vanilla scenario we leave it set to ***false***.
+  - _`SQLMIHA`_ - Boolean that sets whether or not to deploy SQL Managed Instance with high-availability (business continuity) configurations, for this data controller vanilla scenario we leave it set to ***false***.
+  - _`deployPostgreSQL`_ - Boolean that sets whether or not to deploy PostgreSQL, for this data controller vanilla scenario we leave it set to ***false***.
   - **_`customLocationObjectId`_** - The Azure AD application used by Azure Arc service retrieved in the prerequisites section.
 
-> **NOTE: Any variables in bold are required. If any optional parameters are not provided, defaults will be used.**
+> **Note:** Any variables in bold are required. If any optional parameters are not provided, defaults will be used.
 
 - Now you will deploy the Terraform file. Navigate to the local cloned [deployment folder](https://github.com/microsoft/azure_arc/tree/main/azure_arc_data_jumpstart/eks/terraform) and run the commands below:
 
@@ -205,7 +206,7 @@ As mentioned, the Terraform plan will deploy an EKS cluster, the Azure Arc Data 
   terraform apply "infra.out"
   ```
 
-> **NOTE: The deployment time for this scenario can take ~20-35min**
+> **Note:** The deployment time for this scenario can take ~20-35min.
 
 - Example output from `terraform init`:
 
@@ -242,7 +243,6 @@ As mentioned, the Terraform plan will deploy an EKS cluster, the Azure Arc Data 
 - At first login, as mentioned in the "Automation Flow" section above, the [_DataServicesLogonScript_](https://github.com/microsoft/azure_arc/tree/main/azure_arc_data_jumpstart/eks/terraform/artifacts/DataServicesLogonScript.ps1) PowerShell logon script will start it's run.
 
 - Let the script to run its course and **do not close** the PowerShell session, this will be done for you once completed. Once the script will finish it's run, the logon script PowerShell session will be closed, the Windows wallpaper will change and the Azure Arc Data Controller will be deployed on the cluster and be ready to use.
-
 
     ![Screenshot showing the PowerShell logon script run](./24.png)
 
@@ -318,7 +318,7 @@ In order to view these cluster extensions, click on the Azure Arc-enabled Kubern
 
   ![Screenshot showing the deletion of all AWS resources](./43.png)
 
-  > **NOTE: Because the following resources were created by EKS that creates internal AWS dependencies that Terraform has no knowledge of from our plan, we need to delete the resources from AWS console as `terraform destroy` is cleaning up - this allows us to avoid dependency conflicts and ongoing billing from orphaned resources such as EKS Volumes.**
+  > **Note:** Because the following resources were created by EKS that creates internal AWS dependencies that Terraform has no knowledge of from our plan, we need to delete the resources from AWS console as `terraform destroy` is cleaning up - this allows us to avoid dependency conflicts and ongoing billing from orphaned resources such as EKS Volumes.
 
 - While the `destroy` command is running, delete any new Load Balancers created as EKS Services (`EC2 > Load Balancing > Load Balancers`) that are deployed in AWS from the Console:
 
